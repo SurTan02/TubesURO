@@ -73,6 +73,68 @@ int visualisasi (point posisiRobot, point posisiKecoa) {
     return 0;
 }
 
+/*fungsi gerak kecoak*/
+point mendekat(point robot, point kecoak){
+	if (fabs(robot.x-kecoak.x) <= fabs(robot.y-kecoak.y)) {
+		if ((kecoak.y-robot.y)<0) {
+			kecoak.y =+ 1;
+			
+			return (kecoak);}
+		else { 
+			kecoak.y =-1;
+			return (kecoak); 
+			}
+	}
+	else {		// (fabs(robot.x - kecoak.x) > fabs(robot.y-kecoak.y))
+		if ((kecoak.x - robot.x) <0) {
+			kecoak.x =+1;
+			return (kecoak);}
+		else {
+			kecoak.x =-1;
+			return (kecoak); }
+			}
+		}
+/*fungsi spawn*/
+point spawn (point robot){
+
+	point kecoak;
+	srand(time(NULL));
+	kecoak.x  = rand() % 20;
+	kecoak.y = rand() % 20;
+	
+	while ((kecoak.x == robot.x) && (kecoak.y = robot.y)){
+		kecoak.x  = rand() % 20;
+		kecoak.y = rand() % 20;
+	}
+	return (kecoak);
+}
+
+/*fungsi serangan kecoak*/
+int serang(point kecoak,point robot){
+	double jarak2titik,x,y;
+	x = kecoak.x - robot.x;
+	y = kecoak.y - robot.y;
+	jarak2titik = sqrt(x*x + y*y);
+	if (jarak2titik < 2){
+		return (-5);
+}
+	else{
+		return(0);
+	}
+}
+/*fungsi cek validitas dari input*/
+int inputInvalid(char x){
+	int benar;
+	if (x ='maju' or x == 'mundur' or x=='kanan' or x=='kiri'or x=='menyerah'){
+		return (1);
+	}
+	else {
+		return (0);
+	}
+}
+
+
+
 int main() {
     point posisiRobot, posisiKecoa;
     posisiRobot.x = 0;
